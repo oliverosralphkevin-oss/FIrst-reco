@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ralph Kevin Oliveros — Portfolio</title>
+    <!-- Google Fonts for Template Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables for Dynamic Light / Dark Mode Inversion */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f7f7;
+            --bg-card: #ffffff;
+            --bg-hero: #121212;
+            --bg-footer: #121212;
+            
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-hero: #ffffff;
+            --text-hero-muted: #a0a0a0;
+            --text-footer: #ffffff;
+            
+            --border-color: #e5e5e5;
+            --card-border: #efefef;
+            --nav-bg: #121212;
+            --nav-text: #ffffff;
+            --nav-muted: #a0a0a0;
+            --img-blend-mode: multiply;
+            --img-filter: none;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #161b22;
+            --bg-hero: #010409;
+            --bg-footer: #010409;
+            
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-hero: #f0f6fc;
+            --text-hero-muted: #8b949e;
+            --text-footer: #f0f6fc;
+            
+            --border-color: #30363d;
+            --card-border: #30363d;
+            --nav-bg: #161b22;
+            --nav-text: #f0f6fc;
+            --nav-muted: #8b949e;
+            --img-blend-mode: lighten;
+            --img-filter: grayscale(10%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--nav-bg);
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar .brand {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--nav-text);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--nav-muted);
+            text-decoration: none;
+            margin-left: 18px;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--nav-text);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--nav-muted);
+            color: var(--nav-text);
+            padding: 7px 14px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--nav-text);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--bg-hero);
+            min-height: 100vh;
+            padding: 140px 8% 80px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            color: var(--text-hero);
+        }
+
+        .hero-content {
+            max-width: 580px;
+        }
+
+        .hero-subtitle {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-hero-muted);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-description {
+            color: var(--text-hero-muted);
+            font-size: 16px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 14px 32px;
+            border: 1px solid var(--text-hero);
+            color: var(--text-hero);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-hero);
+            color: var(--bg-hero);
+        }
+
+        /* Hero Image Container - No Background, Seamless Blending */
+        .hero-image-side {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        .hero-image-side img {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            object-fit: contain;
+            background: transparent !important;
+            mix-blend-mode: var(--img-blend-mode);
+            filter: var(--img-filter);
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* About Section (Image Replaced with Text Container) */
+        .about-section {
+            padding: 120px 8%;
+            background-color: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .about-text {
+            flex: 1;
+            max-width: 550px;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .about-card-box {
+            flex: 1;
+            background-color: var(--bg-card);
+            padding: 50px;
+            border: 1px solid var(--border-color);
+        }
+
+        .about-card-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--text-primary);
+            padding-bottom: 12px;
+        }
+
+        .about-list {
+            list-style: none;
+        }
+
+        .about-list li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .about-list li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 120px 8%;
+            background-color: var(--bg-primary);
+        }
+
+        .section-header {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border: 1px solid var(--card-border);
+            transition: border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--text-primary);
+        }
+
+        .project-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .project-card .role {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Skills & Info Grid Section */
+        .info-grid-section {
+            padding: 100px 8%;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .three-col-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .grid-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .grid-item p, .grid-item li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .grid-item ul {
+            list-style: none;
+        }
+
+        /* Achievements Section */
+        .achievements-section {
+            padding: 100px 8%;
+            background-color: var(--bg-primary);
+        }
+
+        /* Contact Section & Footer */
+        .contact-section {
+            background-color: var(--bg-footer);
+            color: var(--text-footer);
+            padding: 120px 8% 80px 8%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .contact-email {
+            font-size: 16px;
+            color: var(--text-hero-muted);
+            margin-bottom: 40px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .contact-details {
+            max-width: 500px;
+            margin: 0 auto 50px auto;
+            color: var(--text-hero-muted);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .footer-bottom {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-hero-muted);
+        }
+
+        .social-links a {
+            color: var(--text-hero-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .social-links a:hover {
+            color: var(--text-footer);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .hero, .about-section {
+                flex-direction: column;
+                padding-top: 120px;
+            }
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+            .three-col-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image-side img {
+                max-width: 100%;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#home" class="brand">Ralph Kevin</a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Work</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">Dark Mode</button>
+        </div>
+    </nav>
+
+    <!-- Slide 1: Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="hero-subtitle">IT Professional & Web Technician — Bataan</span>
+            <h1 class="hero-title">Space. Craft. Code.</h1>
+            <p class="hero-description">
+                Hello, I'm Ralph Kevin Oliveros. An aspiring Information Technology specialist dedicated to creating clean, efficient, and impactful web experiences.
+            </p>
+            <a href="#about" class="btn-outline">View Profile</a>
+        </div>
+        <div class="hero-image-side">
+            <img src="profile.png" alt="Ralph Kevin Oliveros" onerror="this.src='https://via.placeholder.com/420x500/121212/ffffff?text=Ralph+Kevin+Oliveros'">
+        </div>
+    </section>
+
+    <!-- Slide 2: About Me (Image Replaced with Formatted Text Card) -->
+    <section class="about-section" id="about">
+        <div class="about-text">
+            <h2>Designing digital spaces that endure.</h2>
+            <p>
+                I believe in clean development, restraint, and functional design. My work as an IT student focuses on building intuitive web interfaces, reliable system structures, and purposeful code.
+            </p>
+            <p>
+                I strip away the unnecessary to reveal essential digital experiences that feel both seamless and timeless. Every line of code serves a clear purpose.
+            </p>
+        </div>
+
+        <div class="about-card-box">
+            <h3>Personal Profile</h3>
+            <ul class="about-list">
+                <li><span>Full Name</span> <strong>Ralph Kevin S. Oliveros</strong></li>
+                <li><span>Field</span> <strong>Information Technology</strong></li>
+                <li><span>Education</span> <strong>2nd Year BSIT Student</strong></li>
+                <li><span>Focus</span> <strong>Web Development & Systems</strong></li>
+                <li><span>Location</span> <strong>Abucay, Bataan, PH</strong></li>
+                <li><span>Specialization</span> <strong>Front-End & Security</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Slide 3: Selected Work / Projects -->
+    <section class="projects-section" id="projects">
+        <div class="section-header">Selected Work</div>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>3D Checkers Game</h3>
+                <span class="role">Developer & Designer • VS Code</span>
+                <p>An interactive, modernized version of classic checkers featuring enhanced gameplay mechanics, custom piece themes, and responsive design.</p>
+            </div>
+            <div class="project-card">
+                <h3>Memory Training Game</h3>
+                <span class="role">Game Developer</span>
+                <p>A web-based cognitive game created to test and improve photographic memory and pattern recall through structured interactive levels.</p>
+            </div>
+            <div class="project-card">
+                <h3>Management Info System</h3>
+                <span class="role">System & Security Lead</span>
+                <p>Architected access control protocols, system security workflows, and user authentication management for organizational data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Skills & Background Grid -->
+    <section class="info-grid-section" id="skills">
+        <div class="three-col-grid">
+            <div class="grid-item">
+                <h4>Technical Skills</h4>
+                <ul>
+                    <li>Software Engineering</li>
+                    <li>Web Development (HTML/CSS/JS)</li>
+                    <li>Data Analytics Basics</li>
+                    <li>System Security Architecture</li>
+                </ul>
+            </div>
+            <div class="grid-item">
+                <h4>Education</h4>
+                <p><strong>BS in Information Technology</strong></p>
+                <p>Eastwoods Professional College (2025–2029)</p>
+                <br>
+                <p><strong>Senior High School</strong></p>
+                <p>St. Catherine of Siena Academy (2025)</p>
+            </div>
+            <div class="grid-item">
+                <h4>Core Strengths</h4>
+                <ul>
+                    <li>Critical & Structured Thinking</li>
+                    <li>Technical Problem Solving</li>
+                    <li>Project Time Management</li>
+                    <li>Continuous Technology Research</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Achievements -->
+    <section class="achievements-section">
+        <div class="section-header">Recognitions</div>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Employee of the Year</h3>
+                <span class="role">Paulo Technologies • 2030</span>
+                <p>Awarded for leadership in technology implementations and consistent technical excellence.</p>
+            </div>
+            <div class="project-card">
+                <h3>Outstanding Employee</h3>
+                <span class="role">Allen Corporation • 2029</span>
+                <p>Recognized for exceptional contribution to monthly system optimization goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Contact & Footer -->
+    <section class="contact-section" id="contact">
+        <h2 class="contact-title">Let's build something lasting.</h2>
+        <a href="mailto:oliverosralphkevin@gmail.com" class="contact-email">oliverosralphkevin@gmail.com</a>
+
+        <div class="contact-details">
+            <p>Phone: 09097010074</p>
+            <p>Location: Abucay, Bataan, Philippines</p>
+        </div>
+
+        <a href="mailto:oliverosralphkevin@gmail.com" class="btn-outline">Get In Touch</a>
+
+        <div class="footer-bottom">
+            <span>© 2026 Ralph Kevin Oliveros. All rights reserved.</span>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme Switching Script -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeToggleBtn');
+            
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                btn.textContent = 'Dark Mode';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.textContent = 'Light Mode';
+            }
+        }
+    </script>
+</body>
+</html>
